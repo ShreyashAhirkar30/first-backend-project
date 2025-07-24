@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Location Tracker</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+       
+       
+    </div>
+    
+    <div id="map"></div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Your custom script -->
+    <script src="/js/script.js"></script>
+    
+    <script>
+        const socket = io();
+        
+        socket.on('connect', function() {
+            console.log('Connected to server via Socket.IO');
+            document.getElementById('status').textContent = 'Connected';
+        });
+        
+        socket.on('disconnect', function() {
+            document.getElementById('status').textContent = 'Disconnected';
+        });
+    </script>
+</body>
+</html>
